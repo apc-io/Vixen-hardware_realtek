@@ -1,0 +1,23 @@
+#ifeq ($(BOARD_WIFI_VENDOR), realtek)
+
+#ifeq ($(WPA_SUPPLICANT_VERSION),VER_0_8_X)
+
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := lib_driver_cmd_rtl
+LOCAL_MODULE_CLASS := STATIC_LIBRARIES
+LOCAL_MODULE_SUFFIX := .a
+LOCAL_SRC_FILES :=  lib_driver_cmd_rtl.a
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS) 
+
+LOCAL_SRC_FILES += dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
+LOCAL_SRC_FILES += wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+LOCAL_SRC_FILES += export_includes:obj/STATIC_LIBRARIES/lib_driver_cmd_rtl_intermediates/export_includes
+
+include $(WMT_PREBUILT)
+
+#endif  #VER_0_8_X
+#endif  #realtek
